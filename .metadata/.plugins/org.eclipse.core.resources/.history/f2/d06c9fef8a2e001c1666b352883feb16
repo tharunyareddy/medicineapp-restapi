@@ -1,0 +1,6 @@
+package com.medicineapp.exception;
+
+@ControllerAdvice
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler  {
+
+}

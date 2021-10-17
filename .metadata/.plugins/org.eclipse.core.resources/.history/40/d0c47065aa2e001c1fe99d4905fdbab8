@@ -1,0 +1,69 @@
+/**
+ * 
+ */
+package com.medicineapp.service;
+
+/**
+ * @author TharunyaREDDY
+ * 
+ */
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.medicineapp.exception.MedicineNotFoundException;
+import com.medicineapp.model.Brand;
+import com.medicineapp.repository.IBrandRepository;
+
+@Service
+public class BrandServiceImpl implements IBrandService {
+
+	@Autowired
+	IBrandRepository brandRepository;
+
+	public void setBrandRepository(IBrandRepository brandRepository) {
+		this.brandRepository = brandRepository;
+	}
+
+	@Override
+	public Brand addBrand(Brand brand) {
+		return brandRepository.save(brand);
+	}
+
+	@Override
+	public void updateBrand(Brand brand) {
+		brandRepository.save(brand);
+	}
+
+	@Override
+	public void deleteBrand(int brandId) throws MedicineNotFoundException{
+		brandRepository.findById(brandId).orElseThrow(()->new MedicineNotFoundException("No Brand Found,Invalid Id"));
+		brandRepository.deleteById(brandId);
+	}
+
+	@Override
+	public List<Brand> getAll() throws MedicineNotFoundException{
+		return brandRepository.findAll();
+	}
+
+	@Override
+	public List<Brand> getByBrandName(String brandName) throws MedicineNotFoundException{
+		return brandRepository.findBybrandName(brandName);
+	}
+
+	@Override
+	public List<Brand> getByOrigin(String origin) throws MedicineNotFoundException{
+		return brandRepository.findByOrigin(origin);
+	}
+
+	@Override
+	public List<Brand> getByBrandNameAndOrigin(String brandName, String origin) throws MedicineNotFoundException{
+		return brandRepository.findBybrandNameAndOrigin(brandName, origin);
+	}
+
+	@Override
+	public List<Brand> getByBrandNameAndMedicineName(String brandName, String name) throws MedicineNotFoundException{
+		return brandRepository.findByBrandNameAndMedicineName(brandName, name);
+	}
+
+}

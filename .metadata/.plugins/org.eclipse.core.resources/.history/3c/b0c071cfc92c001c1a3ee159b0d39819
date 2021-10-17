@@ -1,0 +1,20 @@
+package com.medicineapp.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.medicineapp.model.Category;
+
+@Repository
+public interface ICategoryRepository extends JpaRepository<Category, Integer> {
+
+	List<Category> findByCategoryName(String categoryName);
+
+	// @Query(value="select * from category c inner join medicine m where
+	// c.category_name= ?1 and m.name=?2",nativeQuery = true)
+	@Query("from Category c inner join c.medicinesList m  where c.categoryName=?1 and m.name=?2")
+	List<Category> findByCategoryNameAndName(String categoryName, String name);
+}

@@ -1,0 +1,98 @@
+/**
+ * 
+ */
+package com.medicineapp.controller;
+/**
+ * @author TharunyaREDDY
+ * 
+ */
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.medicineapp.model.Brand;
+
+import com.medicineapp.service.IBrandService;
+import com.medicineapp.service.ICategoryService;
+import com.medicineapp.service.IDescriptionService;
+import com.medicineapp.service.IMedicineService;
+
+@RestController
+@RequestMapping("/brand-api")
+public class BrandController {
+
+	IMedicineService medicineService;
+
+	@Autowired
+	IDescriptionService descriptionService;
+
+	@Autowired
+	IBrandService brandService;
+
+	@Autowired
+	ICategoryService categoryService;
+
+	@Autowired
+	public void setMedicineService(IMedicineService medicineService) {
+		this.medicineService = medicineService;
+	}
+
+	// http://localhost:8080/brand-api/brand
+	@PostMapping("/brand")
+	Brand addBrand(@RequestBody Brand brand) {
+		return brandService.addBrand(brand);
+	}
+
+	// http://localhost:8080/brand-api/brand
+	@PutMapping("/brand")
+	void updateBrand(@RequestBody Brand brand) {
+		brandService.updateBrand(brand);
+	}
+
+	// http://localhost:8080/brand-api/brand/1
+	@DeleteMapping("/brand/{brand}")
+	void deleteProduct(int brandId) {
+		brandService.deleteBrand(brandId);
+	}
+
+	// http://localhost:8080/brand-api/brand
+	@GetMapping("/brand")
+	public List<Brand> getAll() {
+		return brandService.getAll();
+	}
+
+	// http://localhost:8080/brand-api/brand/brandname/Cold Tablet
+	@GetMapping("/brand/brandname/{name}")
+	List<Brand> getByBrandName(@PathVariable("name") String name) {
+		return brandService.getByBrandName(name);
+	}
+
+	// http://localhost:8080/brand-api/brand/brandorigin/Cold Tablet
+	@GetMapping("/brand/brandorigin/{origin}")
+	List<Brand> getByOrigin(@PathVariable("origin") String origin) {
+		return brandService.getByOrigin(origin);
+	}
+
+	// http://localhost:8080/brand-api/brand/brandname/Tyroid Tablet/name/TYroid
+	@GetMapping("/brand/brandname/{brandName}/medicinename/{name}")
+	List<Brand> getByBrandNameAndMedicineName(@PathVariable("brandName") String brandName,
+			@PathVariable("name") String name) {
+		return brandService.getByBrandNameAndMedicineName(brandName, name);
+	}
+
+	// http://localhost:8080/brand-api/brand/brandname/Tyroid Tablet/origin/india
+	@GetMapping("/brand/brandname/{brandName}/origin/{origin}")
+	List<Brand> getByBrandNameAndOrigin(@PathVariable("brandName") String brandName,
+			@PathVariable("origin") String origin) {
+		return brandService.getByBrandNameAndMedicineName(brandName, origin);
+	}
+
+}

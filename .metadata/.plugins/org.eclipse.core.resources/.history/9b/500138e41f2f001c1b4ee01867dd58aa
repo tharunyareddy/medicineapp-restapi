@@ -1,0 +1,97 @@
+/**
+ * 
+ */
+package com.medicineapp.controller;
+
+/**
+ * @author TharunyaREDDY
+ * 
+ */
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.medicineapp.model.Medicine;
+import com.medicineapp.service.IMedicineService;
+
+@RestController
+@RequestMapping("/medicine-api")
+public class MedicineController {
+
+	IMedicineService medicineService;
+
+	@Autowired
+	public void setMedicineService(IMedicineService medicineService) {
+		this.medicineService = medicineService;
+	}
+
+	// http://localhost:8080/medicine-api/medicines
+	@PostMapping("/medicines")
+	Medicine addMedicine(@RequestBody Medicine medicine) {
+		return medicineService.addMedicine(medicine);
+	}
+
+	// http://localhost:8080/medicine-api/medicines
+	@PutMapping("/medicines")
+	void updateMedicine(@RequestBody Medicine medicine) {
+		medicineService.updateMedicine(medicine);
+	}
+
+	// http://localhost:8080/medicine-api/medicines/3
+	@DeleteMapping("/medicines/{medicineId}")
+	void deleteMedicine(@PathVariable("medicineId") int medicineId) {
+		medicineService.deleteMedicine(medicineId);
+	}
+
+	// http://localhost:8080/medicine-api/medicines/1
+	@GetMapping("/medicines/{medicineId}")
+	Medicine getById(@PathVariable("medicineId") int medicineId) {
+		return medicineService.getById(medicineId);
+	}
+
+	// http://localhost:8080/medicine-api/medicines
+	@GetMapping("/medicines")
+	ResponseEntity<List<Medicine>> getAll() {
+		List<Medicine> allmedicines = medicineService.getAll();
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Get all");
+		
+		return ResponseEntity.ok().headers(headers).body(allmedicines); 
+	}
+
+//	// http://localhost:8080/medicine-api/medicines/medicinename/Dolo
+//	@GetMapping("/medicines/medicinename/{name}")
+//	List<Medicine> getByMedicineName(@PathVariable("name") String name) {
+//		return medicineService.getByMedicineName(name);
+//	}
+//
+//	// http://localhost:8080/medicine-api/medicines/medicinetype/Tablet
+//	@GetMapping("/medicines/medicinetype/{type}")
+//	List<Medicine> getByMedicineType(@PathVariable("type") String type) {
+//		return medicineService.getByMedicineType(type);
+//	}
+//
+//	// http://localhost:8080/medicine-api/medicines/medicinename/Dolo/medicinetype/Tablet
+//	@GetMapping("/medicines/medicinename/{name}/medicinetype/{type}")
+//	List<Medicine> getByMedicineNameAndMedicineType(@PathVariable("name") String name,
+//			@PathVariable("type") String type) {
+//		return medicineService.getByMedicineNameAndMedicineType(name, type);
+//	}
+//
+//	// http://localhost:8080/medicine-api/medicines/medicinename/Dolo/categoryname/
+//	@GetMapping("/medicines/medicinename/{name}/categoryname/{categoryName}")
+//	List<Medicine> getByNameAndCategoryName(@PathVariable("name") String name,
+//			@PathVariable("categoryName") String categoryName) {
+//		return medicineService.getByNameAndCategoryName(name, categoryName);
+//	}
+
+}

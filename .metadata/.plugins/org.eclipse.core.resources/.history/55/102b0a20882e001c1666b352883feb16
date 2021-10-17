@@ -1,0 +1,25 @@
+package com.medicineapp.service;
+
+import java.util.List;
+import com.medicineapp.model.Description;
+
+
+public interface IDescriptionService {
+	
+	Description addDescription(Description description);
+
+	void updateDescription(Description description);
+
+	void deleteDescription(int descriptionId);
+
+	List<Description> getAll();
+
+	List<Description> getByMedicineName(String name);
+
+	List<Description> getByLessPrice(double price);
+	
+	List<Description> getByPower(String power);
+	
+	List<Description> getByMedicineNameAndPower(String name,String power);
+
+}

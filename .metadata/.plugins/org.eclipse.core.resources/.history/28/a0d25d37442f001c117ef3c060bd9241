@@ -1,0 +1,54 @@
+/**
+ * 
+ */
+package com.medicineapp.model;
+/**
+ * @author TharunyaREDDY
+ * 
+ */
+
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Entity
+public class Brand {
+
+	@Id
+	@GeneratedValue(generator = "brand_gen", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "brand_gen", sequenceName = "brand_seq", initialValue = 1, allocationSize = 1)
+	private Integer brandId;
+
+	@Column(length = 20)
+	private String brandName;
+
+	@Column(length = 20)
+	private String origin;
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name="brand_id")
+	@JsonIgnore
+	Set<Medicine> medicineList;
+
+}

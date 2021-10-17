@@ -1,0 +1,5 @@
+package com.medicineapp.model;
+
+public class ApiErrors {
+
+}

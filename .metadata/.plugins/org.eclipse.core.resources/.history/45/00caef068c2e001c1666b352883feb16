@@ -1,0 +1,9 @@
+package com.medicineapp.model;
+import java.time.LocalDateTime;
+
+public class ApiErrors{
+	LocalDateTime timestap;
+	String message;
+	int status;
+	String error;
+}

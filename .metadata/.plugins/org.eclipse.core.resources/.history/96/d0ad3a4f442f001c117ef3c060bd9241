@@ -1,0 +1,50 @@
+/**
+ * 
+ */
+package com.medicineapp.model;
+
+/**
+ * @author TharunyaREDDY
+ * 
+ */
+
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Entity
+public class Category {
+
+	@Id
+	@GeneratedValue(generator = "category_gen", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "category_gen", sequenceName = "category_seq", initialValue = 1, allocationSize = 1)
+	private Integer categoryId;
+
+	@Column(length = 20)
+	private String categoryName;
+
+	@ManyToMany(mappedBy = "categoryList", fetch = FetchType.EAGER)
+	@JsonIgnore
+	Set<Medicine> medicinesList;
+
+}

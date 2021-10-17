@@ -1,0 +1,108 @@
+/**
+ * 
+ */
+package com.medicineapp.service;
+
+/**
+ * @author TharunyaREDDY
+ * 
+ */
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.medicineapp.exception.MedicineNotFoundException;
+import com.medicineapp.model.Medicine;
+import com.medicineapp.repository.IMedicineRepository;
+
+@Service
+public class MedicineServiceImpl implements IMedicineService {
+
+	@Autowired
+	IMedicineRepository medicineRepository;
+
+	public void setMedicineRepository(IMedicineRepository medicineRepository) {
+		this.medicineRepository = medicineRepository;
+	}
+
+	 To add medicines
+	@Override
+	public Medicine addMedicine(Medicine medicine) {
+		return medicineRepository.save(medicine);
+	}
+//
+//	// To update medicine
+//	@Override
+//	public void updateMedicine(Medicine medicine) {
+//		medicineRepository.save(medicine);
+//	}
+//
+//	// To delete Medicine By Medicine Id
+//	@Override
+//	public void deleteMedicine(int medicineId) throws MedicineNotFoundException {
+//		medicineRepository.findById(medicineId)
+//				.orElseThrow(() -> new MedicineNotFoundException("No Medicine Found,Invalid Id"));
+//		medicineRepository.deleteById(medicineId);
+//	}
+//
+//	// To get All Medicines
+//	@Override
+//	public List<Medicine> getAll() throws MedicineNotFoundException {
+//
+//		List<Medicine> allMedicines = medicineRepository.findAll();
+//		if (allMedicines.isEmpty()) {
+//			throw new MedicineNotFoundException("No Medicines");
+//		}
+//		return allMedicines;
+//	}
+//
+//	// To get Medicine By Medicine Id
+//	@Override
+//	public Medicine getById(int medicineId) throws MedicineNotFoundException {
+//		return medicineRepository.findById(medicineId)
+//				.orElseThrow(() -> new MedicineNotFoundException("No Medicine Found,Invalid Id"));
+//	}
+//
+//	// To get Medicine By Medicine Name
+//	@Override
+//	public List<Medicine> getByMedicineName(String name) {
+//
+//		List<Medicine> medicinesByName = medicineRepository.findByName(name);
+//		if (medicinesByName.isEmpty()) {
+//			throw new MedicineNotFoundException("No Medicines found by name");
+//		}
+//		return medicinesByName;
+//	}
+//
+//	// To get Medicine By Medicine Type
+//	@Override
+//	public List<Medicine> getByMedicineType(String type) {
+//
+//		List<Medicine> medicinesByType = medicineRepository.findByType(type);
+//		if (medicinesByType.isEmpty()) {
+//			throw new MedicineNotFoundException("No Medicines by type");
+//		}
+//		return medicinesByType;
+//	}
+//
+//	// To get Medicine By Medicine Name And Medicine Type
+//	@Override
+//	public List<Medicine> getByMedicineNameAndMedicineType(String name, String type) {
+//		List<Medicine> medicinesByNameAndType = medicineRepository.findByNameAndType(name, type);
+//		if (medicinesByNameAndType.isEmpty()) {
+//			throw new MedicineNotFoundException("No Medicines by type");
+//		}
+//		return medicinesByNameAndType;
+//	}
+//
+//	// To get Medicine By Medicine Name And Category Name
+//	@Override
+//	public List<Medicine> getByNameAndCategoryName(String name, String categoryName) {
+//		List<Medicine> medicinesByNameAndCategory = medicineRepository.findByNameAndCategoryName(name, categoryName);
+//		if (medicinesByNameAndCategory.isEmpty()) {
+//			throw new MedicineNotFoundException("No Medicines by type");
+//		}
+//		return medicinesByNameAndCategory;
+//	}
+
+}

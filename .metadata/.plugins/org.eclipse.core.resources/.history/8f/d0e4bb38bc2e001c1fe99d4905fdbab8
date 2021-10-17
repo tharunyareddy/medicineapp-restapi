@@ -1,0 +1,39 @@
+/**
+ * 
+ */
+package com.medicineapp.service;
+
+/**
+ * @author TharunyaREDDY
+ * 
+ */
+import java.util.List;
+
+import com.medicineapp.exception.MedicineNotFoundException;
+import com.medicineapp.model.Medicine;
+
+public interface IMedicineService {
+	
+	//CRUD
+	
+	Medicine addMedicine(Medicine medicine);
+
+	void updateMedicine(Medicine medicine);
+
+	void deleteMedicine(int medicineId) throws MedicineNotFoundException;
+	
+	Medicine getById(int medicineId) throws MedicineNotFoundException;
+
+	List<Medicine> getAll() throws MedicineNotFoundException;
+	
+	//Custom 
+
+	List<Medicine> getByMedicineName(String name) throws MedicineNotFoundException;
+
+	List<Medicine> getByMedicineType(String type) throws MedicineNotFoundException;
+	
+	List<Medicine> getByMedicineNameAndMedicineType(String name, String type) throws MedicineNotFoundException;
+	
+	List<Medicine> getByNameAndCategoryName(String name, String categoryName) throws MedicineNotFoundException;
+
+}

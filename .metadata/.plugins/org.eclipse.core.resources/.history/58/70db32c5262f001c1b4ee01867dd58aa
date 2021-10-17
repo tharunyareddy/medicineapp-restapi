@@ -1,0 +1,78 @@
+/**
+ * 
+ */
+package com.medicineapp.controller;
+/**
+ * @author TharunyaREDDY
+ * 
+ */
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.medicineapp.model.Description;
+import com.medicineapp.service.IDescriptionService;
+
+
+@RestController
+@RequestMapping("/description-api")
+public class DescriptionController {
+
+	@Autowired
+	IDescriptionService descriptionService;
+
+	
+	// http://localhost:8080/description-api/description
+	@PostMapping("/description")
+	Description addDescription(@RequestBody Description description) {
+		return descriptionService.addDescription(description);
+	}
+
+	// http://localhost:8080/description-api/description
+	@PutMapping("/description")
+	void updateDescription(@RequestBody Description description) {
+		descriptionService.updateDescription(description);
+	}
+
+	// http://localhost:8080/description-api/description/1
+	@DeleteMapping("/description/{descriptionId}")
+	void deleteProduct(int descriptionId) {
+		descriptionService.deleteDescription(descriptionId);
+	}
+
+	// http://localhost:8080/description-api/description
+	@GetMapping("/description")
+	public List<Description> getAll() {
+		return descriptionService.getAll();
+	}
+
+//	// http://localhost:8080/description-api/description/medicinename/Cold tablet
+//	@GetMapping("/description/medicinename/{name}")
+//	public List<Description> getByName(String name) {
+//		return descriptionService.getByMedicineName(name);
+//	}
+//
+//	// http://localhost:8080/description-api/description/price
+//	@GetMapping("/description/price/{price}")
+//	public List<Description> getByLessPrice(double price) {
+//		return descriptionService.getByLessPrice(price);
+//	}
+//
+//	// http://localhost:8080/description-api/description/power/25MG
+//	@GetMapping("/description/power/{power}")
+//	public List<Description> getByPower(String power) {
+//		return descriptionService.getByPower(power);
+//	}
+//   //http://localhost:8080/description-api/description/medicinename/Cold Tablet/power/25MG
+//
+//	@GetMapping("/description/medicinename/{name}/power/{power}")
+//	public List<Description> getByMedicineNameAndPower(String name, String power) {
+//		return descriptionService.getByMedicineNameAndPower(name, power);
+//	}
+
+}

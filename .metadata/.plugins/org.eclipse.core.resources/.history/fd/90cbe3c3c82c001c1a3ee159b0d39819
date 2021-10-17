@@ -1,0 +1,5 @@
+package com.medicineapp.controller;
+
+public class CategoryController {
+
+}

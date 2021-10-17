@@ -1,0 +1,30 @@
+/**
+ * 
+ */
+package com.medicineapp.service;
+
+/**
+ * @author TharunyaREDDY
+ * 
+ */
+import java.util.List;
+import com.medicineapp.model.Brand;
+
+public interface IBrandService {
+	
+	Brand addBrand(Brand brand);
+
+	void updateBrand(Brand barnd);
+
+	void deleteBrand(int brandId);
+
+	List<Brand> getAll();
+	
+	List<Brand> getByBrandName(String brandName);
+	
+	List<Brand> getByOrigin(String origin); 
+	
+	List<Brand> getByBrandNameAndOrigin(String brandName,String origin);
+	
+	List<Brand> getByBrandNameAndMedicineName(String brandName,String name);
+}

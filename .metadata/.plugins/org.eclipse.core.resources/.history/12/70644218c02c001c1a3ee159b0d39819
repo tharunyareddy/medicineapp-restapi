@@ -1,0 +1,52 @@
+package com.medicineapp.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Entity
+public class Description {
+
+	@Id
+	@GeneratedValue(generator = "description_gen", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "description_gen", sequenceName = "description_seq", initialValue = 1, allocationSize = 1)
+	private Integer descriptionId;
+	@Column(length = 20)
+	private String power;
+
+	private double price;
+
+	@OneToOne
+	private Medicine medicine;
+
+	public Description() {
+		super();
+	}
+
+	public Description(String power, double price) {
+		super();
+		this.power = power;
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "Description [power=" + power + ", price=" + price + "]";
+	}
+
+}

@@ -1,0 +1,72 @@
+/**
+ * 
+ */
+package com.medicineapp;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+/**
+ * @author TharunyaREDDY
+ * 
+ */
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.medicineapp.model.Brand;
+import com.medicineapp.model.Category;
+import com.medicineapp.model.Description;
+import com.medicineapp.model.Medicine;
+import com.medicineapp.service.IBrandService;
+import com.medicineapp.service.ICategoryService;
+import com.medicineapp.service.IDescriptionService;
+import com.medicineapp.service.IMedicineService;
+
+@SpringBootApplication
+public class SpringMedicineappProjectApplication implements CommandLineRunner {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringMedicineappProjectApplication.class, args);
+	}
+	
+
+	@Autowired
+	IMedicineService medicineService;
+
+	@Autowired
+	IDescriptionService descriptionService;
+
+	@Autowired
+	IBrandService brandService;
+
+	@Autowired
+	ICategoryService categoryService;
+
+	@Override
+	public void run(String... args) throws Exception {
+
+		Brand brand = new Brand("Dolo Tablet", "India", null);
+		brandService.addBrand(brand);
+
+		Category category1 = new Category("Fever", null);
+		categoryService.addCategory(category1);
+
+		
+
+		List<Category> categoryList = Arrays.asList(category1);
+		Set<Category> categorySet = new HashSet<>(categoryList);
+
+		Medicine medicine = new Medicine("Dolo", "Tablet", LocalDate.of(2021, 6, 13),
+				LocalDate.of(2024, 3, 15), brand, categorySet);
+		
+	   	Description description = new Description("50MG", 40,null);
+		descriptionService.addDescription(description);
+		
+		 medicineService.addMedicine(medicine);
+
+	}
+}
